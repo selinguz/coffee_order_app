@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../constants.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Coffees extends StatefulWidget {
   const Coffees({super.key});
@@ -16,8 +16,8 @@ class _CoffeesState extends State<Coffees> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Choose Your Coffee',
-          style: TextStyle(fontSize: 24),
+          'Choose Your Drink',
+          style: TextStyle(fontSize: 22),
         ),
         backgroundColor: appBarBackgroundColor,
       ),
@@ -30,57 +30,176 @@ class _CoffeesState extends State<Coffees> {
               ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
                 visualDensity: VisualDensity(vertical: 4),
-                leading: FaIcon(FontAwesomeIcons.mugHot,color: Colors.brown[600],size: 28,),
+                leading: Icon(MdiIcons.coffeeOutline,
+                    color: Colors.brown[600], size: 30),
                 title: GestureDetector(
-                  child: Text('Espresso'),
+                  child: Text(
+                    'Espresso',
+                    style: TextStyle(fontSize: 20),
+                  ),
                   onTap: () {},
                 ),
-                trailing: Icon(Icons.more_vert),
+                trailing: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _onAlertButtonsPressed(context);
+                    });
+                  },
+                  icon: Icon(MdiIcons.plusThick),
+                  iconSize: 28,
+                  color: Colors.brown,
+                ),
               ),
               ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
                 visualDensity: VisualDensity(vertical: 4),
-                leading: FaIcon(FontAwesomeIcons.mugSaucer,color: Colors.brown[600],),
+                leading:
+                    Icon(MdiIcons.coffee, color: Colors.brown[600], size: 30),
                 title: GestureDetector(
-                  child: Text('Latte'),
+                  child: Text(
+                    'Latte',
+                    style: TextStyle(fontSize: 20),
+                  ),
                   onTap: () {},
                 ),
-                trailing: Icon(Icons.more_vert),
+                trailing: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _onAlertButtonsPressed(context);
+                    });
+                  },
+                  icon: Icon(MdiIcons.plusThick),
+                  iconSize: 28,
+                  color: Colors.brown,
+                ),
               ),
               ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
                 visualDensity: VisualDensity(vertical: 4),
-                leading: Icon(MdiIcons.coffeeMaker,color: Colors.brown[600],size: 28,),
+                leading: Icon(
+                  MdiIcons.coffeeMaker,
+                  color: Colors.brown[600],
+                  size: 30,
+                ),
                 title: GestureDetector(
-                  child: Text('Americano'),
+                  child: Text(
+                    'Americano',
+                    style: TextStyle(fontSize: 20),
+                  ),
                   onTap: () {},
                 ),
-                trailing: Icon(Icons.more_vert),
+                trailing: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _onAlertButtonsPressed(context);
+                    });
+                  },
+                  icon: Icon(MdiIcons.plusThick),
+                  iconSize: 28,
+                  color: Colors.brown,
+                ),
               ),
               ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
                 visualDensity: VisualDensity(vertical: 4),
-                leading: Icon(MdiIcons.tea,color: Colors.brown[600],size:28),
+                leading: Icon(MdiIcons.tea, color: Colors.brown[600], size: 30),
                 title: GestureDetector(
-                  child: Text('Herbal Tea'),
+                  child: Text(
+                    'Herbal Tea',
+                    style: TextStyle(fontSize: 20),
+                  ),
                   onTap: () {},
                 ),
-                trailing: Icon(Icons.more_vert),
+                trailing: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _onAlertButtonsPressed(context);
+                    });
+                  },
+                  icon: Icon(MdiIcons.plusThick),
+                  iconSize: 28,
+                  color: Colors.brown,
+                ),
               ),
               ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
                 visualDensity: VisualDensity(vertical: 4),
-                leading: Icon(MdiIcons.water,color: Colors.brown[600],size:32),
+                leading:
+                    Icon(MdiIcons.water, color: Colors.brown[600], size: 30),
                 title: GestureDetector(
-                  child: Text('Water'),
+                  child: Text(
+                    'Water',
+                    style: TextStyle(fontSize: 20),
+                  ),
                   onTap: () {},
                 ),
-                trailing: Icon(Icons.more_vert),
+                trailing: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _onAlertButtonsPressed(context);
+                    });
+                  },
+                  icon: Icon(MdiIcons.plusThick),
+                  iconSize: 28,
+                  color: Colors.brown,
+                ),
               ),
             ],
           ).toList(),
         ),
       ),
     );
+  }
+
+  _onAlertButtonsPressed(context) {
+    Alert(
+      context: context,
+      type: AlertType.info,
+      title: "Message",
+      desc: "The drink will be added to your cart.",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "YES",
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          onPressed: () {
+            setState(() {
+              Alert(
+                context: context,
+                type: AlertType.success,
+                title: "Message",
+                desc: "Added to your cart successfully",
+                buttons: [
+                  DialogButton(
+                    child: Text(
+                      "OK",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    onPressed: () => Navigator.pushAndRemoveUntil<dynamic>(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (BuildContext context) => Coffees(),
+                      ),
+                      (route) =>
+                          false, //if you want to disable back feature set to false
+                    ),
+                    width: 120,
+                  )
+                ],
+              ).show();
+            });
+          },
+        ),
+        DialogButton(
+            child: Text(
+              "NO",
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            })
+      ],
+    ).show();
   }
 }
