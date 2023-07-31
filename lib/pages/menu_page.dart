@@ -153,12 +153,14 @@ class _CoffeesState extends State<Coffees> {
 
   _onAlertButtonsPressed(context) {
     Alert(
+      style: AlertStyle(backgroundColor: pageBackgroundColor),
       context: context,
       type: AlertType.info,
       title: "Message",
       desc: "The drink will be added to your cart.",
       buttons: [
         DialogButton(
+          color: appBarBackgroundColor,
           child: Text(
             "YES",
             style: TextStyle(color: Colors.white, fontSize: 18),
@@ -166,12 +168,14 @@ class _CoffeesState extends State<Coffees> {
           onPressed: () {
             setState(() {
               Alert(
+                style: AlertStyle(backgroundColor: pageBackgroundColor),
                 context: context,
                 type: AlertType.success,
                 title: "Message",
                 desc: "Added to your cart successfully",
                 buttons: [
                   DialogButton(
+                    color: appBarBackgroundColor,
                     child: Text(
                       "OK",
                       style: TextStyle(color: Colors.white, fontSize: 20),
@@ -192,12 +196,39 @@ class _CoffeesState extends State<Coffees> {
           },
         ),
         DialogButton(
+            color: appBarBackgroundColor,
             child: Text(
               "NO",
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),
             onPressed: () {
-              Navigator.pop(context);
+              setState(() {
+                Alert(
+                style: AlertStyle(backgroundColor: pageBackgroundColor),
+                context: context,
+                type: AlertType.error,
+                title: "Message",
+                desc: "Adding to cart is cancelled",
+                buttons: [
+                  DialogButton(
+                    color: appBarBackgroundColor,
+                    child: Text(
+                      "OK",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    onPressed: () => Navigator.pushAndRemoveUntil<dynamic>(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (BuildContext context) => Coffees(),
+                      ),
+                      (route) =>
+                          false, //if you want to disable back feature set to false
+                    ),
+                    width: 120,
+                  )
+                ],
+              ).show();
+              });
             })
       ],
     ).show();
