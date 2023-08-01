@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 
 class Coffees extends StatefulWidget {
   const Coffees({super.key});
@@ -11,6 +12,14 @@ class Coffees extends StatefulWidget {
 }
 
 class _CoffeesState extends State<Coffees> {
+  final iconList = <IconData>[
+    Icons.brightness_5,
+    Icons.brightness_4,
+    Icons.brightness_6,
+    Icons.brightness_7,
+  ];
+
+  dynamic tabBuilder;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,6 +157,38 @@ class _CoffeesState extends State<Coffees> {
           ).toList(),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.brown,
+        child: Icon(
+          MdiIcons.cart,
+          color: Colors.white,
+        ),
+        onPressed: () {},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: AnimatedBottomNavigationBar.builder(
+        itemCount: iconList.length,
+        backgroundColor: appBarBackgroundColor,
+        tabBuilder: (int index, bool isActive) {
+          final color = isActive ? Colors.white : Colors.black;
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                iconList[index],
+                size: 24,
+                color: color,
+              ),
+              const SizedBox(height: 4),
+            ],
+          );
+        },
+        activeIndex: 0,
+        gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.verySmoothEdge,
+        onTap: (index) {},
+      ),
     );
   }
 
@@ -204,30 +245,30 @@ class _CoffeesState extends State<Coffees> {
             onPressed: () {
               setState(() {
                 Alert(
-                style: AlertStyle(backgroundColor: pageBackgroundColor),
-                context: context,
-                type: AlertType.error,
-                title: "Message",
-                desc: "Adding to cart is cancelled",
-                buttons: [
-                  DialogButton(
-                    color: appBarBackgroundColor,
-                    child: Text(
-                      "OK",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                    onPressed: () => Navigator.pushAndRemoveUntil<dynamic>(
-                      context,
-                      MaterialPageRoute<dynamic>(
-                        builder: (BuildContext context) => Coffees(),
+                  style: AlertStyle(backgroundColor: pageBackgroundColor),
+                  context: context,
+                  type: AlertType.error,
+                  title: "Message",
+                  desc: "Adding to cart is cancelled",
+                  buttons: [
+                    DialogButton(
+                      color: appBarBackgroundColor,
+                      child: Text(
+                        "OK",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
-                      (route) =>
-                          false, //if you want to disable back feature set to false
-                    ),
-                    width: 120,
-                  )
-                ],
-              ).show();
+                      onPressed: () => Navigator.pushAndRemoveUntil<dynamic>(
+                        context,
+                        MaterialPageRoute<dynamic>(
+                          builder: (BuildContext context) => Coffees(),
+                        ),
+                        (route) =>
+                            false, //if you want to disable back feature set to false
+                      ),
+                      width: 120,
+                    )
+                  ],
+                ).show();
               });
             })
       ],
