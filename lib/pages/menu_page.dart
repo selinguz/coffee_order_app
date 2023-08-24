@@ -221,33 +221,3 @@ class _CoffeesState extends State<Coffees> {
   }
 }
 
-
- 
-
-
-
-/* ListTile(
-                  titleAlignment: ListTileTitleAlignment.center,
-                  visualDensity: VisualDensity(vertical: 4),
-                  leading: Icon(
-                    coffees[index].icon,
-                  ),
-                  title: GestureDetector(
-                    child: Text(
-                      coffees[index].name,
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    onTap: () {},
-                  ),
-                  trailing: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _onAlertButtonsPressed(context);
-                      });
-                    },
-                    icon: Icon(MdiIcons.plusThick),
-                    iconSize: 28,
-                    color: Colors.brown,
-                  ),
-                );
- */

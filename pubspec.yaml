@@ -40,6 +40,7 @@ dependencies:
   animated_bottom_navigation_bar: ^1.2.0
   persistent_bottom_nav_bar: ^5.0.2
   http: ^1.1.0
+  quantity_input: ^1.0.2
 
 dev_dependencies:
   flutter_test:
